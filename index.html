@@ -16,7 +16,7 @@ body{
 
 h1{
     margin-top:30px;
-    font-size:38px;
+    font-size:32px;
     letter-spacing:1px;
 }
 
@@ -24,24 +24,26 @@ h1{
     margin:15px 25px;
     font-size:18px;
     opacity:0.9;
+    line-height:1.6;
 }
 
 /* slideshow */
 .slideshow{
     position:relative;
-    max-width:90%;
-    height:350px;
-    margin:30px auto;
+    max-width:92%;
+    height:60vh;   /* responsive */
+    margin:25px auto;
     border-radius:15px;
     overflow:hidden;
     box-shadow:0 10px 25px rgba(0,0,0,0.5);
+    background:black;
 }
 
 .slide{
     position:absolute;
     width:100%;
     height:100%;
-    object-fit:cover;
+    object-fit:contain;   /* elegant fit */
     opacity:0;
     transition:opacity 1s ease-in-out;
 }
@@ -73,21 +75,20 @@ button{
 <h1>Happy Valentine's Day My Love ❤️</h1>
 
 <div class="message">
-ನಿನ್ನ ಕಂಗಳ ನೋಟದಲಿ
-ಬೆಳಗುತಿದೆ ಎನ್ನುಸಿರೆಂಬ ದೀವಿಗೆ
-ಆರದದು ಎಂದಿಗೂ,
-ನಿನ್ನೊಲವೆಂಬ ಸುದೆಯ ಎರಕವಿರಲು! ❤️
+ನಿನ್ನ ಕಂಗಳ ನೋಟದಲಿ<br>
+ಬೆಳಗುತಿದೆ ಎನ್ನುಸಿರೆಂಬ ದೀವಿಗೆ<br>
+ಆರದದು ಎಂದಿಗೂ,<br>
+ನಿನ್ನೊಲವೆಂಬ ಸುದೆಯ ಎರಕವಿರಲು ❤️
 </div>
 
 <div class="slideshow">
-    <!-- ADD AS MANY PHOTOS AS YOU WANT -->
     <img class="slide active" src="silout.jpg">
     <img class="slide" src="proposal.jpg">
     <img class="slide" src="jump.jpg">
     <img class="slide" src="pair.jpg">
     <img class="slide" src="snow.jpg">
     <img class="slide" src="piono.jpg">
-     <img class="slide" src="maduve.jpg">
+    <img class="slide" src="maduve.jpg">
 </div>
 
 <div class="controls">
@@ -96,37 +97,5 @@ button{
 </div>
 
 <audio id="bgMusic">
-    <!-- YOUR MUSIC FILE -->
     <source src="olavu.mp3" type="audio/mpeg">
-</audio>
-
-<div style="margin-top:15px;">
-    <button onclick="playMusic()">Play Our Song 🎵</button>
-</div>
-
-<script>
-let slides = document.querySelectorAll(".slide");
-let index = 0;
-let interval = setInterval(nextSlide, 3000);
-
-function nextSlide(){
-    slides[index].classList.remove("active");
-    index = (index + 1) % slides.length;
-    slides[index].classList.add("active");
-}
-
-function pauseSlides(){
-    clearInterval(interval);
-}
-
-function startSlides(){
-    interval = setInterval(nextSlide, 3000);
-}
-
-function playMusic(){
-    document.getElementById("bgMusic").play();
-}
-</script>
-
-</body>
-</html>
+</audio

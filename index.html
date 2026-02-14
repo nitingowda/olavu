@@ -8,7 +8,7 @@
 <style>
 body{
     margin:0;
-    font-family: 'Georgia', serif;
+    font-family: Georgia, serif;
     background: linear-gradient(to bottom, #1a1a1a, #3a3a3a);
     color:white;
     text-align:center;
@@ -25,11 +25,10 @@ h1{
     line-height:1.6;
 }
 
-/* slideshow */
 .slideshow{
     position:relative;
     width:95%;
-    height:65vh;
+    height:60vh;
     margin:20px auto;
     border-radius:15px;
     overflow:hidden;
@@ -40,18 +39,12 @@ h1{
     position:absolute;
     width:100%;
     height:100%;
-    object-fit:cover;   /* FULL SCREEN */
+    object-fit:cover;
     opacity:0;
-    transition:opacity 1s ease-in-out;
 }
 
 .slide.active{
     opacity:1;
-}
-
-/* buttons */
-.controls{
-    margin-top:10px;
 }
 
 button{
@@ -88,7 +81,7 @@ button{
     <img class="slide" src="maduve.jpg">
 </div>
 
-<div class="controls">
+<div>
     <button onclick="pauseSlides()">Pause ⏸️</button>
     <button onclick="startSlides()">Play ▶️</button>
 </div>
@@ -97,47 +90,33 @@ button{
     <source src="olavu.mp3" type="audio/mpeg">
 </audio>
 
-<div style="margin-top:10px;">
+<div>
     <button onclick="playMusic()">Play Our Song 🎵</button>
 </div>
 
 <script>
-window.onload = function(){
+var slides = document.getElementsByClassName("slide");
+var index = 0;
+var interval = setInterval(nextSlide, 3000);
 
-    const slides = document.querySelectorAll(".slide");
-    let index = 0;
-    let interval;
+function nextSlide(){
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+}
 
-    function nextSlide(){
-        slides[index].classList.remove("active");
-        index = (index + 1) % slides.length;
-        slides[index].classList.add("active");
-    }
+function pauseSlides(){
+    clearInterval(interval);
+}
 
-    function start(){
-        if(interval) clearInterval(interval);
-        interval = setInterval(nextSlide, 3000);
-    }
+function startSlides(){
+    clearInterval(interval);
+    interval = setInterval(nextSlide, 3000);
+}
 
-    start();
-
-    window.pauseSlides = function(){
-        clearInterval(interval);
-    }
-
-    window.startSlides = function(){
-        start();
-    }
-
-    window.playMusic = function(){
-        const music = document.getElementById("bgMusic");
-        music.volume = 1;
-        music.muted = false;
-
-        music.play().catch(()=>{
-            alert("If music didn’t start, tap again ❤️");
-        });
-    }
+function playMusic(){
+    var music = document.getElementById("bgMusic");
+    music.play();
 }
 </script>
 

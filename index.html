@@ -115,41 +115,52 @@ button{
 var slides = document.getElementsByClassName("slide");
 var index = 0;
 var timeoutId = null;
+var music = document.getElementById("bgMusic");
 
-/* change slide */
+/* slide change */
 function nextSlide(){
     slides[index].classList.remove("active");
     index = (index + 1) % slides.length;
     slides[index].classList.add("active");
 
-    // schedule next
     timeoutId = setTimeout(nextSlide, 3000);
 }
 
-/* PLAY */
+/* PLAY EVERYTHING */
 function startSlides(){
-    pauseSlides();  // cancel old
+    pauseSlides(); // stop old
+
     timeoutId = setTimeout(nextSlide, 3000);
+
+    if(music){
+        music.play();
+    }
+
     console.log("PLAY");
 }
 
-/* PAUSE */
+/* PAUSE EVERYTHING */
 function pauseSlides(){
     clearTimeout(timeoutId);
     timeoutId = null;
+
+    if(music){
+        music.pause();
+    }
+
     console.log("PAUSE");
 }
 
-/* MUSIC */
+/* MUSIC BUTTON */
 function playMusic(){
-    document.getElementById("bgMusic").play();
+    if(music){
+        music.play();
+    }
 }
 
-/* start automatically */
-startSlides();
+/* auto start slideshow (without music) */
+timeoutId = setTimeout(nextSlide, 3000);
 </script>
-
-
 
 </body>
 </html>

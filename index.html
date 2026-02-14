@@ -114,29 +114,29 @@ button{
 <script>
 var slides = document.getElementsByClassName("slide");
 var index = 0;
+var timeoutId = null;
 
-/* keep all timers here */
-var timers = [];
-
-/* move slide */
+/* change slide */
 function nextSlide(){
     slides[index].classList.remove("active");
     index = (index + 1) % slides.length;
     slides[index].classList.add("active");
+
+    // schedule next
+    timeoutId = setTimeout(nextSlide, 3000);
 }
 
 /* PLAY */
 function startSlides(){
-    pauseSlides();   // kill everything first
-    timers.push(setInterval(nextSlide, 3000));
+    pauseSlides();  // cancel old
+    timeoutId = setTimeout(nextSlide, 3000);
     console.log("PLAY");
 }
 
 /* PAUSE */
 function pauseSlides(){
-    while(timers.length){
-        clearInterval(timers.pop());
-    }
+    clearTimeout(timeoutId);
+    timeoutId = null;
     console.log("PAUSE");
 }
 
@@ -145,9 +145,10 @@ function playMusic(){
     document.getElementById("bgMusic").play();
 }
 
-/* AUTO START */
+/* start automatically */
 startSlides();
 </script>
+
 
 
 </body>

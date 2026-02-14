@@ -3,49 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Valentine's Day ❤️</title>
+<title>Our Memories ❤️</title>
 
 <style>
 body{
     margin:0;
-    font-family: Arial, sans-serif;
-    text-align:center;
-    background: linear-gradient(to bottom right,#ff758c,#ff7eb3);
+    font-family: 'Georgia', serif;
+    background: linear-gradient(to bottom, #1a1a1a, #3a3a3a);
     color:white;
+    text-align:center;
 }
 
 h1{
-    margin-top:40px;
-    font-size:40px;
+    margin-top:30px;
+    font-size:38px;
+    letter-spacing:1px;
 }
 
 .message{
-    margin:20px;
-    font-size:20px;
+    margin:15px 25px;
+    font-size:18px;
+    opacity:0.9;
 }
 
-.gallery{
-    margin-top:30px;
-}
-
-.gallery img{
-    width:250px;
-    height:250px;
-    object-fit:cover;
+/* slideshow */
+.slideshow{
+    position:relative;
+    max-width:90%;
+    height:350px;
+    margin:30px auto;
     border-radius:15px;
-    margin:10px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.3);
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,0.5);
+}
+
+.slide{
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0;
+    transition:opacity 1s ease-in-out;
+}
+
+.slide.active{
+    opacity:1;
+}
+
+/* buttons */
+.controls{
+    margin-top:10px;
 }
 
 button{
-    padding:12px 20px;
-    font-size:18px;
-    background:white;
-    color:#ff4d6d;
+    padding:10px 18px;
+    font-size:16px;
+    margin:5px;
     border:none;
-    border-radius:10px;
-    margin-top:20px;
+    border-radius:8px;
     cursor:pointer;
+    background:white;
+    color:#333;
 }
 </style>
 </head>
@@ -55,26 +73,55 @@ button{
 <h1>Happy Valentine's Day My Love ❤️</h1>
 
 <div class="message">
-    From the day we married, my life became beautiful.<br>
-    Every moment with you is special.<br>
-    I love you forever ❤️
+ನಿನ್ನ ಕಂಗಳ ನೋಟದಲಿ
+ಬೆಳಗುತಿದೆ ಎನ್ನುಸಿರೆಂಬ ದೀವಿಗೆ
+ಆರದದು ಎಂದಿಗೂ,
+ನಿನ್ನೊಲವೆಂಬ ಸುದೆಯ ಎರಕವಿರಲು! ❤️
 </div>
 
-<button onclick="playMusic()">Play Our Song 🎵</button>
+<div class="slideshow">
+    <!-- ADD AS MANY PHOTOS AS YOU WANT -->
+    <img class="slide active" src="silout.jpg">
+    <img class="slide" src="proposal.jpg">
+    <img class="slide" src="jump.jpg">
+    <img class="slide" src="pair.jpg">
+    <img class="slide" src="snow.jpg">
+     <img class="slide" src="maduve.jpg">
+</div>
 
-<div class="gallery">
-    <!-- CHANGE YOUR PHOTOS HERE -->
-    <img src="silout.jpg">
-    <img src="propose.jpg">
-    <img src="jump.jpg">
+<div class="controls">
+    <button onclick="pauseSlides()">Pause ⏸️</button>
+    <button onclick="startSlides()">Play ▶️</button>
 </div>
 
 <audio id="bgMusic">
-    <!-- PUT YOUR SONG FILE NAME -->
-    <source src="usiru.mp3" type="audio/mpeg">
+    <!-- YOUR MUSIC FILE -->
+    <source src="olavu.mp3" type="audio/mpeg">
 </audio>
 
+<div style="margin-top:15px;">
+    <button onclick="playMusic()">Play Our Song 🎵</button>
+</div>
+
 <script>
+let slides = document.querySelectorAll(".slide");
+let index = 0;
+let interval = setInterval(nextSlide, 3000);
+
+function nextSlide(){
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+}
+
+function pauseSlides(){
+    clearInterval(interval);
+}
+
+function startSlides(){
+    interval = setInterval(nextSlide, 3000);
+}
+
 function playMusic(){
     document.getElementById("bgMusic").play();
 }

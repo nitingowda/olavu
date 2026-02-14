@@ -25,6 +25,7 @@ h1{
     line-height:1.6;
 }
 
+/* slideshow frame */
 .slideshow{
     position:relative;
     width:95%;
@@ -33,15 +34,18 @@ h1{
     border-radius:15px;
     overflow:hidden;
     background:black;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
+/* image */
 .slide{
     position:absolute;
-    width:100%;
-    height:100%;
-    object-fit:cover;
+    max-width:100%;
+    max-height:100%;
     opacity:0;
-    transition:opacity 1s;
+    transition:opacity 1s ease-in-out;
 }
 
 .slide.active{
@@ -87,7 +91,6 @@ button{
     <button onclick="startSlides()">Play ▶️</button>
 </div>
 
-<!-- SIMPLE AUDIO -->
 <audio id="bgMusic" src="usiru.mp3"></audio>
 
 <div>
@@ -97,7 +100,7 @@ button{
 <script>
 var slides = document.getElementsByClassName("slide");
 var index = 0;
-var interval = setInterval(nextSlide, 3000);
+var interval = null;
 
 function nextSlide(){
     slides[index].classList.remove("active");
@@ -105,18 +108,22 @@ function nextSlide(){
     slides[index].classList.add("active");
 }
 
-function pauseSlides(){
-    clearInterval(interval);
+function startSlides(){
+    if(interval) return;   // already running
+    interval = setInterval(nextSlide, 3000);
 }
 
-function startSlides(){
+function pauseSlides(){
     clearInterval(interval);
-    interval = setInterval(nextSlide, 3000);
+    interval = null;
 }
 
 function playMusic(){
     document.getElementById("bgMusic").play();
 }
+
+/* auto start */
+startSlides();
 </script>
 
 </body>

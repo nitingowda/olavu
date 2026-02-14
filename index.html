@@ -9,14 +9,14 @@
 body{
     margin:0;
     font-family: Georgia, serif;
-    background: linear-gradient(to bottom, #1a1a1a, #3a3a3a);
+    background: linear-gradient(to bottom, #111, #444);
     color:white;
     text-align:center;
 }
 
 h1{
-    margin-top:25px;
-    font-size:30px;
+    margin-top:20px;
+    font-size:28px;
 }
 
 .message{
@@ -28,11 +28,11 @@ h1{
 .slideshow{
     position:relative;
     width:95%;
-    height:60vh;
+    height:65vh;
     margin:20px auto;
     border-radius:15px;
     overflow:hidden;
-    box-shadow:0 10px 25px rgba(0,0,0,0.5);
+    background:black;
 }
 
 .slide{
@@ -41,6 +41,7 @@ h1{
     height:100%;
     object-fit:cover;
     opacity:0;
+    transition:opacity 1s;
 }
 
 .slide.active{
@@ -86,12 +87,11 @@ button{
     <button onclick="startSlides()">Play ▶️</button>
 </div>
 
-<audio id="bgMusic">
-    <source src="olavu.mp3" type="audio/mpeg">
-</audio>
+<!-- SIMPLE AUDIO -->
+<audio id="bgMusic" src="olavu.mp3"></audio>
 
 <div>
-    <button onclick="playMusic()">Play Our Song 🎵</button>
+    <button onclick="playMusic()">ಹಾಡು ಕೇಳೆg 🎵</button>
 </div>
 
 <script>
@@ -115,8 +115,7 @@ function startSlides(){
 }
 
 function playMusic(){
-    var music = document.getElementById("bgMusic");
-    music.play();
+    document.getElementById("bgMusic").play();
 }
 </script>
 

@@ -33,29 +33,32 @@ h1{
     margin:20px auto;
     border-radius:15px;
     overflow:hidden;
+
+    /* BEAUTIFUL SIDE FADE */
+    background:
+      linear-gradient(to right,
+        rgba(0,0,0,0.9),
+        rgba(0,0,0,0.2) 20%,
+        rgba(0,0,0,0.2) 80%,
+        rgba(0,0,0,0.9)
+      );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-/* blurred bg */
-.bg{
-    position:absolute;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    filter: blur(25px) brightness(0.6);
-    transform:scale(1.2);
-}
-
-/* main image */
+/* image */
 .slide{
-    position:absolute;
     max-width:100%;
     max-height:100%;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
+    position:absolute;
     opacity:0;
     transition:opacity 1s ease-in-out;
     border-radius:10px;
+
+    /* small glow */
+    box-shadow:0 0 25px rgba(255,255,255,0.15);
 }
 
 .slide.active{
@@ -87,10 +90,6 @@ button{
 </div>
 
 <div class="slideshow">
-    <!-- background copy -->
-    <img class="bg" src="silout.jpg" id="bgImg">
-
-    <!-- main images -->
     <img class="slide active" src="silout.jpg">
     <img class="slide" src="propose.jpg">
     <img class="slide" src="jump.jpg">
@@ -113,30 +112,28 @@ button{
 
 <script>
 var slides = document.getElementsByClassName("slide");
-var bg = document.getElementById("bgImg");
-
 var index = 0;
-var interval = null;
+var interval;
 
+/* next image */
 function nextSlide(){
     slides[index].classList.remove("active");
     index = (index + 1) % slides.length;
     slides[index].classList.add("active");
-
-    // update background
-    bg.src = slides[index].src;
 }
 
+/* play */
 function startSlides(){
-    if(interval) return;
+    clearInterval(interval);
     interval = setInterval(nextSlide, 3000);
 }
 
+/* pause */
 function pauseSlides(){
     clearInterval(interval);
-    interval = null;
 }
 
+/* music */
 function playMusic(){
     document.getElementById("bgMusic").play();
 }

@@ -114,8 +114,11 @@ button{
 <script>
 var slides = document.getElementsByClassName("slide");
 var index = 0;
-var timer = null;
 
+/* keep all timers here */
+var timers = [];
+
+/* move slide */
 function nextSlide(){
     slides[index].classList.remove("active");
     index = (index + 1) % slides.length;
@@ -124,15 +127,16 @@ function nextSlide(){
 
 /* PLAY */
 function startSlides(){
-    clearInterval(timer);
-    timer = setInterval(nextSlide, 3000);
+    pauseSlides();   // kill everything first
+    timers.push(setInterval(nextSlide, 3000));
     console.log("PLAY");
 }
 
 /* PAUSE */
 function pauseSlides(){
-    clearInterval(timer);
-    timer = null;
+    while(timers.length){
+        clearInterval(timers.pop());
+    }
     console.log("PAUSE");
 }
 
@@ -141,9 +145,10 @@ function playMusic(){
     document.getElementById("bgMusic").play();
 }
 
-/* AUTO */
+/* AUTO START */
 startSlides();
 </script>
+
 
 </body>
 </html>

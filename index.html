@@ -101,8 +101,8 @@ button{
 </div>
 
 <div>
-    <button onclick="pauseSlides()">Pause ⏸️</button>
-    <button onclick="startSlides()">Play ▶️</button>
+    <button onclick="pauseSlides()">ನಿಲ್ಸು ಪೋಟೋವಾ ⏸️</button>
+    <button onclick="startSlides()">ಓಡ್ಸು ಪೋಟೋವಾ ▶️</button>
 </div>
 
 <audio id="bgMusic" src="usiru.mp3"></audio>
@@ -123,14 +123,14 @@ function nextSlide(){
     index = (index + 1) % slides.length;
     slides[index].classList.add("active");
 
-    timeoutId = setTimeout(nextSlide, 3000);
+    timeoutId = setTimeout(nextSlide, 2000);
 }
 
 /* PLAY EVERYTHING */
 function startSlides(){
     pauseSlides(); // stop old
 
-    timeoutId = setTimeout(nextSlide, 3000);
+    timeoutId = setTimeout(nextSlide, 2000);
 
     if(music){
         music.play();
@@ -159,7 +159,7 @@ function playMusic(){
 }
 
 /* auto start slideshow (without music) */
-timeoutId = setTimeout(nextSlide, 3000);
+timeoutId = setTimeout(nextSlide, 2000);
 </script>
 
 </body>

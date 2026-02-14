@@ -9,9 +9,11 @@
 body{
     margin:0;
     font-family: Georgia, serif;
-    background: linear-gradient(to bottom, #111, #444);
     color:white;
     text-align:center;
+
+    /* romantic background */
+    background: radial-gradient(circle at center, #3b1d2a, #0f0f0f);
 }
 
 h1{
@@ -34,13 +36,13 @@ h1{
     border-radius:15px;
     overflow:hidden;
 
-    /* nice side fade */
+    /* SOFT ROMANTIC SIDES */
     background:
       linear-gradient(to right,
-        rgba(0,0,0,0.9),
-        rgba(0,0,0,0.25) 20%,
-        rgba(0,0,0,0.25) 80%,
-        rgba(0,0,0,0.9)
+        rgba(255,105,135,0.25),
+        rgba(0,0,0,0.15) 25%,
+        rgba(0,0,0,0.15) 75%,
+        rgba(255,105,135,0.25)
       );
 
     display:flex;
@@ -48,7 +50,7 @@ h1{
     justify-content:center;
 }
 
-/* images */
+/* image */
 .slide{
     position:absolute;
     max-width:100%;
@@ -56,7 +58,8 @@ h1{
     opacity:0;
     transition:opacity 1s ease-in-out;
     border-radius:10px;
-    box-shadow:0 0 25px rgba(255,255,255,0.15);
+
+    box-shadow:0 0 40px rgba(255,120,150,0.4);
 }
 
 .slide.active{
@@ -111,35 +114,34 @@ button{
 <script>
 var slides = document.getElementsByClassName("slide");
 var index = 0;
-var intervalId = null;
+var timer = null;
 
-/* next image */
-function showNext(){
+function nextSlide(){
     slides[index].classList.remove("active");
     index = (index + 1) % slides.length;
     slides[index].classList.add("active");
 }
 
-/* play */
+/* PLAY */
 function startSlides(){
-    clearInterval(intervalId);
-    intervalId = setInterval(showNext, 3000);
+    clearInterval(timer);
+    timer = setInterval(nextSlide, 3000);
     console.log("PLAY");
 }
 
-/* pause */
+/* PAUSE */
 function pauseSlides(){
-    clearInterval(intervalId);
-    intervalId = null;
+    clearInterval(timer);
+    timer = null;
     console.log("PAUSE");
 }
 
-/* music */
+/* MUSIC */
 function playMusic(){
     document.getElementById("bgMusic").play();
 }
 
-/* auto start */
+/* AUTO */
 startSlides();
 </script>
 
